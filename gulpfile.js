@@ -17,6 +17,7 @@ var gulp = vitreumTasks(gulp, {
 
 	serverWatchPaths: ["server"],
 	serverScript: "server.js",
+
 	libs: [
 		"react",
 		"react-dom",
@@ -24,16 +25,7 @@ var gulp = vitreumTasks(gulp, {
 		"classnames",
 		"pico-router",
 	],
-	clientLibs: [],
+	clientLibs: [
+
+	],
 });
-
-
-var rename = require('gulp-rename');
-var less = require('gulp-less');
-gulp.task('phb', function(){
-	gulp.src('./client/homebrew/phbStyle/phb.style.less')
-		.pipe(less())
-		.pipe(rename('phb.standalone.css'))
-		.pipe(gulp.dest('./'));
-})
-

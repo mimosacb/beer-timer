@@ -1,7 +1,13 @@
 {
-	"C:\\Users\\Scott\\Desktop\\beer-timer\\client\\beertimer\\beertimer.jsx": [
+	"C:\\Users\\Scott\\Desktop\\beer-timer\\client\\beertimer\\timer\\timer.jsx": [
 		"react",
 		"lodash",
 		"classnames"
+	],
+	"C:\\Users\\Scott\\Desktop\\beer-timer\\client\\beertimer\\beertimer.jsx": [
+		"react",
+		"lodash",
+		"classnames",
+		"./timer/timer.jsx"
 	]
 }
