@@ -1,2 +1,2 @@
 # beer-timer
-Time all your homebrewing steps and temperatures: mash, sparge, boild and pitch
+Time all your homebrewing steps and temperatures: mash, sparge, boil and pitch
