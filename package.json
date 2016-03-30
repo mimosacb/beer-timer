@@ -1,0 +1,31 @@
+{
+  "name": "beer-timer",
+  "version": "1.0.0",
+  "description": "Time all your homebrewing steps and temperatures: mash, sparge, boil and pitch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mimosacb/beer-timer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mimosacb/beer-timer/issues"
+  },
+  "homepage": "https://github.com/mimosacb/beer-timer#readme",
+  "dependencies": {
+    "app-module-path": "^1.0.6",
+    "classnames": "^2.2.3",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "lodash": "^4.6.1",
+    "moment": "^2.12.0",
+    "pico-router": "^1.1.1",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "vitreum": "^3.1.3"
+  }
+}
