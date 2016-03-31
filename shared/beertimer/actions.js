@@ -8,6 +8,9 @@ var Actions = {
 	incTimer : function(){
 		dispatch('INC_TIMER');
 	},
+	decTimer: function() {
+		dispatch('DEC_TIMER');
+	},
 	pauseTimer : function(){
 		dispatch('PAUSE_TIMER');
 	},

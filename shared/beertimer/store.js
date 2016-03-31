@@ -6,8 +6,24 @@ var Store = {
 	timer : {
 		isRunning : false,
 		time : 0
-	}
-
+	},
+	steps: [
+		{
+			name : 'setup',
+			time : 0,
+			isCountDown : false
+		},
+		{
+			name : 'sparge',
+			time : 350,
+			isCountDown : true
+		},
+		{
+			name : 'boil',
+			time : 350,
+			isCountDown : true
+		}
+	]
 };
 
 
@@ -28,18 +44,23 @@ module.exports = flux.createStore({
 	INC_TIMER : function(){
 		Store.timer.time = Store.timer.time + 1;
 	},
+	DEC_TIMER: function(){
+		Store.timer.time = Store.timer.time - 1;
+	},
 	PAUSE_TIMER : function(){
 		Store.timer.isRunning = false;
 	},
 	RESUME_TIMER : function(){
 		Store.timer.isRunning = true;
 	},
-
-
 },{
 
 	//Getters allow your components to easily grab slices of the Store's state to process/use
 	getTimerInfo : function(){
 		return Store.timer;
 	},
-})
+
+	getCurrentStep: function(){
+		return Store.steps[0];
+	}
+});

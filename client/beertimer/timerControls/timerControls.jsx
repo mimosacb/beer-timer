@@ -21,6 +21,9 @@ var TimerControls = React.createClass({
 	handleIncClick : function(){
 		Actions.incTimer();
 	},
+	handleDecClick : function(){
+		Actions.decTimer();
+	},
 	handlePauseClick : function(){
 		Actions.pauseTimer();
 	},
@@ -45,6 +48,7 @@ var TimerControls = React.createClass({
 			<h2>Timer Controls</h2>
 			<button onClick={this.handleResetClick}>Reset</button>
 			<button onClick={this.handleIncClick}>Increment</button>
+			<button onClick={this.handleDecClick}>Decrement</button>
 			{this.renderPauseResumeButton()}
 		</div>
 	}

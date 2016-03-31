@@ -7,6 +7,7 @@ var Store = require('beertimer/store.js');
 //Components
 var Timer = require('components/timer/timer.jsx');
 var TimerControls = require('./timerControls/timerControls.jsx');
+var CurrentStep = require('./currentStep/currentStep.jsx');
 
 
 var BeerTimer = React.createClass({
@@ -15,20 +16,24 @@ var BeerTimer = React.createClass({
 	mixins : [Store.mixin()],
 	getInitialState: function() {
 		return {
-			timerInfo : Store.getTimerInfo()
+			timerInfo : Store.getTimerInfo(),
+			currentStep: Store.getCurrentStep(),
 		};
 	},
 
 	//This fires whenever the store's state changes for any reason
 	onStoreChange : function(){
 		this.setState({
-			timerInfo : Store.getTimerInfo()
-		})
+			timerInfo : Store.getTimerInfo(),
+			currentStep: Store.getCurrentStep(),
+		});
 	},
 
 	render : function(){
 		return <div className='beertimer'>
 			Hello Chris you are cool
+			<CurrentStep step={this.state.currentStep} />
+
 			<Timer time={this.state.timerInfo.time} />
 			<TimerControls info={this.state.timerInfo} />
 		</div>
