@@ -23,7 +23,7 @@
     "gulp": "^3.9.1",
     "lodash": "^4.6.1",
     "moment": "^2.12.0",
-    "pico-router": "^1.1.1",
+    "pico-flux": "^1.1.0",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "vitreum": "^3.1.3"

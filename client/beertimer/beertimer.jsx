@@ -2,41 +2,35 @@ var React = require('react');
 var _ = require('lodash');
 var cx = require('classnames');
 
+var Store = require('beertimer/store.js');
 
-var Timer = require('./timer/timer.jsx');
+//Components
+var Timer = require('components/timer/timer.jsx');
+var TimerControls = require('./timerControls/timerControls.jsx');
 
 
 var BeerTimer = React.createClass({
-
+	//Will make this component listen for updates from this store and call onStoreChange
+	//This is called a 'smart' component because it knows about your store
+	mixins : [Store.mixin()],
 	getInitialState: function() {
 		return {
-			time : 0
+			timerInfo : Store.getTimerInfo()
 		};
 	},
 
-	beginTimer : function(){
-		var self = this;
-		this.timer = setInterval(function(){
-			self.setState({
-				time : self.state.time + 1
-			})
-		}, 1000);
-	},
-
-	componentDidMount: function() {
-		this.beginTimer();
-	},
-
-	componentWillUnmount: function() {
-		//If this component unloads for any reason, make sure will kill the timer
-		clearInterval(this.timer);
+	//This fires whenever the store's state changes for any reason
+	onStoreChange : function(){
+		this.setState({
+			timerInfo : Store.getTimerInfo()
+		})
 	},
 
 	render : function(){
 		return <div className='beertimer'>
 			Hello Chris you are cool
-
-			<Timer seconds={this.state.time} />
+			<Timer time={this.state.timerInfo.time} />
+			<TimerControls info={this.state.timerInfo} />
 		</div>
 	},
 
