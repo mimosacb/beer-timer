@@ -35,7 +35,7 @@ var Store = {
 
 //Run a little clock here to update your store internally
 setInterval(function(){
-	if(Store.timer.isRunning){
+	if(Store.timer.isRunning && Store.steps.isCountDown){
 		Actions.incTimer();
 	}
 },1000);

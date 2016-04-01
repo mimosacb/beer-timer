@@ -17,7 +17,6 @@ var CurrentStep = React.createClass({
 	render : function(){
 		return <div className='currentStep'>
 			{this.props.step.name}
-			{this.props.step.time}
 		</div>
 	},
 
