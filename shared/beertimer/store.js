@@ -7,6 +7,7 @@ var Store = {
 		isRunning : false,
 		time : 0
 	},
+	currentStep : 0,
 	steps: [
 		{
 			name : 'setup',
@@ -20,6 +21,11 @@ var Store = {
 		},
 		{
 			name : 'boil',
+			time : 350,
+			isCountDown : true
+		},
+		{
+			name : 'ice bath',
 			time : 350,
 			isCountDown : true
 		}
@@ -53,6 +59,9 @@ module.exports = flux.createStore({
 	RESUME_TIMER : function(){
 		Store.timer.isRunning = true;
 	},
+	INC_STEP : function(){
+		Store.currentStep = Store.currentStep + 1;
+	},
 },{
 
 	//Getters allow your components to easily grab slices of the Store's state to process/use
@@ -61,6 +70,6 @@ module.exports = flux.createStore({
 	},
 
 	getCurrentStep: function(){
-		return Store.steps[0];
+		return Store.steps[Store.currentStep];
 	}
 });
