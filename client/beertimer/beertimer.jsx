@@ -31,7 +31,7 @@ var BeerTimer = React.createClass({
 
 	render : function(){
 		return <div className='beertimer'>
-			Hello Chris you are cool
+			This is where your current step will go
 			<CurrentStep step={this.state.currentStep} />
 
 			<Timer time={this.state.timerInfo.time} />

@@ -17,6 +17,9 @@ var Actions = {
 	resumeTimer : function(){
 		dispatch('RESUME_TIMER');
 	},
+	incStep : function(){
+		dispatch('INC_STEP');
+	},
 };
 
 module.exports = Actions;

@@ -18,7 +18,6 @@ var CurrentStep = React.createClass({
 		return <div className='currentStep'>
 			{this.props.step.name}
 			{this.props.step.time}
-			{this.props.step.isCountDown}
 		</div>
 	},
 

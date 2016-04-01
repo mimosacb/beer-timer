@@ -30,6 +30,9 @@ var TimerControls = React.createClass({
 	handleResumeClick : function(){
 		Actions.resumeTimer();
 	},
+	handleIncStep : function(){
+		Actions.incStep();
+	},
 
 	renderPauseResumeButton : function(){
 		if(this.props.info.isRunning){
@@ -49,6 +52,7 @@ var TimerControls = React.createClass({
 			<button onClick={this.handleResetClick}>Reset</button>
 			<button onClick={this.handleIncClick}>Increment</button>
 			<button onClick={this.handleDecClick}>Decrement</button>
+			<button onClick={this.handleIncStep}>Next Step</button>
 			{this.renderPauseResumeButton()}
 		</div>
 	}
