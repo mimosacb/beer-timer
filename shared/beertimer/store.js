@@ -1,8 +1,8 @@
 var flux = require('pico-flux');
 var Actions = require('beertimer/actions.js');
 
-//Put the initial state of your store here
-var Store = {
+//Put the initial state of your State here
+var State = {
 	timer : {
 		isRunning : false,
 		time : 0
@@ -33,43 +33,45 @@ var Store = {
 };
 
 
-//Run a little clock here to update your store internally
+//Run a little clock here to update your State internally
 setInterval(function(){
-	if(Store.timer.isRunning && Store.steps.isCountDown){
+	if(State.timer.isRunning && Store.getCurrentStep().isCountDown){
 		Actions.incTimer();
 	}
 },1000);
 
 
-module.exports = flux.createStore({
+var Store = flux.createState({
 
 	//Setup your action listners here, these will trigger when the associated action is called
 	SET_TIMER : function(timeValue){
-		Store.timer.time = timeValue;
+		State.timer.time = timeValue;
 	},
 	INC_TIMER : function(){
-		Store.timer.time = Store.timer.time + 1;
+		State.timer.time = State.timer.time + 1;
 	},
 	DEC_TIMER: function(){
-		Store.timer.time = Store.timer.time - 1;
+		State.timer.time = State.timer.time - 1;
 	},
 	PAUSE_TIMER : function(){
-		Store.timer.isRunning = false;
+		State.timer.isRunning = false;
 	},
 	RESUME_TIMER : function(){
-		Store.timer.isRunning = true;
+		State.timer.isRunning = true;
 	},
 	INC_STEP : function(){
-		Store.currentStep = Store.currentStep + 1;
+		State.currentStep = State.currentStep + 1;
 	},
 },{
 
-	//Getters allow your components to easily grab slices of the Store's state to process/use
+	//Getters allow your components to easily grab slices of the State's state to process/use
 	getTimerInfo : function(){
-		return Store.timer;
+		return State.timer;
 	},
 
 	getCurrentStep: function(){
-		return Store.steps[Store.currentStep];
+		return State.steps[State.currentStep];
 	}
 });
+
+module.exports = Store;
