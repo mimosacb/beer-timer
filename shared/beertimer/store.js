@@ -4,10 +4,11 @@ var Actions = require('beertimer/actions.js');
 //Put the initial state of your State here
 var State = {
 	timer : {
+		direction : 'up', //'down'
 		isRunning : false,
 		time : 0
 	},
-	currentStep : 0,
+	currentStepIndex : 0,
 	steps: [
 		{
 			name : 'setup',
@@ -15,33 +16,41 @@ var State = {
 			isCountDown : false
 		},
 		{
-			name : 'sparge',
-			time : 350,
+			name : 'mash',
+			time : 3600,
 			isCountDown : true
 		},
 		{
+			name : 'sparge',
+			time : 0,
+			isCountDown : false
+		},
+		{
 			name : 'boil',
-			time : 350,
+			time : 3600,
 			isCountDown : true
 		},
 		{
 			name : 'ice bath',
-			time : 350,
-			isCountDown : true
+			time : 0,
+			isCountDown : false
 		}
 	]
 };
 
-
 //Run a little clock here to update your State internally
 setInterval(function(){
-	if(State.timer.isRunning && Store.getCurrentStep().isCountDown){
-		Actions.incTimer();
+	if(State.timer.isRunning){
+		if(State.timer.direction == 'up'){
+			Actions.incTimer();
+		}else{
+			Actions.decTimer();
+		}
 	}
 },1000);
 
 
-var Store = flux.createState({
+var Store = flux.createStore({
 
 	//Setup your action listners here, these will trigger when the associated action is called
 	SET_TIMER : function(timeValue){
@@ -59,10 +68,33 @@ var Store = flux.createState({
 	RESUME_TIMER : function(){
 		State.timer.isRunning = true;
 	},
-	INC_STEP : function(){
-		State.currentStep = State.currentStep + 1;
+
+
+	SET_STEP_INDEX : function(index){
+		if(State.currentStepIndex == index) return false;
+
+		State.currentStepIndex = index;
+		var currentStep = Store.getCurrentStep();
+
+		State.timer.isRunning = true;
+		if(currentStep.isCountDown){
+			State.timer.direction = 'up';
+		}else{
+			State.timer.direction = 'down';
+		}
+
+		State.timer.time = currentStep.time;
+
+		//start timer
+		//set timer direction to up, if it’s a not count down step
+		//update timer time tp steps time
+
 	},
+
 },{
+	getState : function(){
+		return State;
+	},
 
 	//Getters allow your components to easily grab slices of the State's state to process/use
 	getTimerInfo : function(){
@@ -70,7 +102,7 @@ var Store = flux.createState({
 	},
 
 	getCurrentStep: function(){
-		return State.steps[State.currentStep];
+		return State.steps[State.currentStepIndex];
 	}
 });
 

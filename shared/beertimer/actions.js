@@ -1,5 +1,7 @@
 var dispatch = require('pico-flux').dispatch;
 
+var Store = require('beertimer/store');
+
 
 var Actions = {
 	setTimer : function(time){
@@ -17,8 +19,13 @@ var Actions = {
 	resumeTimer : function(){
 		dispatch('RESUME_TIMER');
 	},
-	incStep : function(){
-		dispatch('INC_STEP');
+
+	//Step Action
+	setStepIndex : function(index){
+		dispatch('SET_STEP_INDEX', index);
+	},
+	nextStep : function(){
+		Actions.setStepIndex(Store.getState().currentStepIndex + 1)
 	},
 };
 

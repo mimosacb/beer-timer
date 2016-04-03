@@ -31,7 +31,7 @@ var TimerControls = React.createClass({
 		Actions.resumeTimer();
 	},
 	handleIncStep : function(){
-		Actions.incStep();
+		Actions.nextStep();
 	},
 
 	renderPauseResumeButton : function(){
