@@ -7,8 +7,8 @@ var Actions = require('beertimer/actions.js');
 
 
 //Components
-var Timer = require('components/timer/timer.jsx');
-var TimerControls = require('./timerControls/timerControls.jsx');
+var Timer = require('beertimer/components/timer/timer.jsx');
+//var TimerControls = require('./timerControls/timerControls.jsx');
 var CurrentStep = require('./currentStep/currentStep.jsx');
 var StepList = require('./stepList/stepList.jsx');
 
@@ -44,14 +44,11 @@ var BeerTimer = React.createClass({
 
 	render : function(){
 
-		console.log(this.state.currentStep.bgColor);
 
 		return <div className='beertimer' style={{backgroundColor : this.state.currentStep.bgColor}}>
-			Current step:
-			<CurrentStep step={this.state.currentStep} />
-
+			<h1><CurrentStep step={this.state.currentStep} /></h1>
 			<Timer time={this.state.timerInfo.time} />
-			<TimerControls info={this.state.timerInfo} />
+			{/*<TimerControls info={this.state.timerInfo} />*/}
 
 
 			<StepList steps={this.state.steps} selectedIndex={Store.getState().currentStepIndex} />

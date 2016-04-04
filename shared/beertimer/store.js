@@ -15,31 +15,31 @@ var State = {
 			name : 'setup',
 			time : 0,
 			isCountDown : false,
-			bgColor : 'red'
+			bgColor : '#81A801'
 		},
 		{
 			name : 'mash',
 			time : 3600,
 			isCountDown : true,
-			bgColor : 'black'
+			bgColor : '#D98027'
 		},
 		{
 			name : 'sparge',
 			time : 0,
 			isCountDown : false,
-			bgColor : 'blue'
+			bgColor : '#B36615'
 		},
 		{
 			name : 'boil',
 			time : 3600,
 			isCountDown : true,
-			bgColor : 'purple'
+			bgColor : '#B64240'
 		},
 		{
 			name : 'ice bath',
 			time : 0,
 			isCountDown : false,
-			bgColor : 'orange'
+			bgColor : '#3EA0B5'
 		}
 	]
 };

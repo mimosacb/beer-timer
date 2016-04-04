@@ -22,7 +22,7 @@ var StepList = React.createClass({
 			var checkmark;
 			if(isSelected) checkmark = <i className='fa fa-beer' />
 
-			return <div
+			return <div key={index}
 				className={cx('step', {selected : isSelected})}
 				onClick={this.handleChangeStep.bind(this, index)}>
 				{checkmark} {step.name}
@@ -31,11 +31,9 @@ var StepList = React.createClass({
 	},
 
 	render : function(){
-		return <div className='stepList'>
-			Hey Chris
-
+		return <h2 className='stepList'>
 			{this.renderSteps()}
-		</div>
+		</h2>
 	}
 });
 
