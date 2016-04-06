@@ -1,6 +1,5 @@
 var flux = require('pico-flux');
-
-
+var fetch = require('isomorphic-fetch');
 
 //Put the initial state of your State here
 var State = {
@@ -12,41 +11,30 @@ var State = {
 	currentStepIndex : 0,
 	steps: [
 		{
-			name : 'setup',
+			name : '',
 			time : 0,
 			isCountDown : false,
-			bgColor : '#81A801'
+			bgColor : '#FFFFFF'
 		},
-		{
-			name : 'mash',
-			time : 3600,
-			isCountDown : true,
-			bgColor : '#D98027'
-		},
-		{
-			name : 'sparge',
-			time : 0,
-			isCountDown : false,
-			bgColor : '#B36615'
-		},
-		{
-			name : 'boil',
-			time : 3600,
-			isCountDown : true,
-			bgColor : '#B64240'
-		},
-		{
-			name : 'ice bath',
-			time : 0,
-			isCountDown : false,
-			bgColor : '#3EA0B5'
-		}
 	]
 };
 
 
 var Store = flux.createStore({
 	INIT : function(){
+
+		fetch('/api/brews/awesome_brew')
+			.then(response => response.json())
+			.then(json => {
+				var steps = json && json.steps;
+				if (steps) {
+					State.steps = steps;
+					this.emitChange();
+				} else {
+					console.error('Failed to load brew');
+				}
+			});
+
 		setInterval(()=>{
 			if(State.timer.isRunning){
 				if(State.timer.direction == 'up'){
@@ -57,10 +45,8 @@ var Store = flux.createStore({
 				this.emitChange();
 			}
 		}, 1000);
-
 		var tempState = localStorage.getItem('test');
 		if(tempState) State = _.extend({}, State, JSON.parse(tempState));
-
 	},
 
 
@@ -83,7 +69,6 @@ var Store = flux.createStore({
 		State.timer.isRunning = true;
 	},
 
-
 	SET_STEP_INDEX : function(index){
 		//start timer
 		//set timer direction to up, if it’s a not count down step
@@ -102,10 +87,7 @@ var Store = flux.createStore({
 		}
 
 		State.timer.time = currentStep.time;
-
-
 	},
-
 },{
 	getState : function(){
 		return State;

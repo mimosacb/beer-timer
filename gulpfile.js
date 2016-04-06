@@ -21,6 +21,7 @@ var gulp = vitreumTasks(gulp, {
 	libs: [
 		"react",
 		"react-dom",
+		"isomorphic-fetch",
 		"lodash",
 		"classnames",
 		"pico-flux",

@@ -1,0 +1,35 @@
+{
+  "name" : "The Awesome Brew",
+  "steps" : [
+    {
+      "name" : "setup",
+      "time" : 0,
+      "isCountDown" : false,
+      "bgColor" : "#81A801"
+    },
+    {
+      "name" : "mash",
+      "time" : 3600,
+      "isCountDown" : true,
+      "bgColor" : "#D98027"
+    },
+    {
+      "name" : "sparge",
+      "time" : 0,
+      "isCountDown" : false,
+      "bgColor" : "#B36615"
+    },
+    {
+      "name" : "boil",
+      "time" : 3600,
+      "isCountDown" : true,
+      "bgColor" : "#B64240"
+    },
+    {
+      "name" : "ice bath",
+      "time" : 0,
+      "isCountDown" : false,
+      "bgColor" : "#3EA0B5"
+    }
+  ]
+}

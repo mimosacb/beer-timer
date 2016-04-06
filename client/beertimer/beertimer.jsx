@@ -5,9 +5,7 @@ var cx = require('classnames');
 var Store = require('beertimer/store.js');
 var Actions = require('beertimer/actions.js');
 
-
 //Components
-//var TimerControls = require('./timerControls/timerControls.jsx');
 var CurrentStep = require('./currentStep/currentStep.jsx');
 var StepList = require('./stepList/stepList.jsx');
 
@@ -20,6 +18,7 @@ var BeerTimer = React.createClass({
 			steps : Store.getState().steps
 		};
 	},
+
 	onStoreChange : function(){
 		localStorage.setItem('test', JSON.stringify(Store.getState()));
 		this.setState({
@@ -52,6 +51,5 @@ var BeerTimer = React.createClass({
 		</div>
 	},
 });
-
 
 module.exports = BeerTimer;
