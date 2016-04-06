@@ -31,5 +31,67 @@
       "isCountDown" : false,
       "bgColor" : "#3EA0B5"
     }
-  ]
+  ],
+
+  "ingredients" : {
+    "malts" : [
+      {
+        "name" : "Two Row",
+        "unit": "lbs",
+        "quantity": 2
+      },
+      {
+        "name": "Crystal 60",
+        "unit": "lbs",
+        "quantity" : 1
+      },
+      {
+        "name": "Chocolate",
+        "unit": "lbs",
+        "quantity": 0.5
+      }
+    ],
+    "strike_water":  {
+      "unit": "oz",
+      "quantity": 1.2,
+      "temp": 150
+    },
+    "sparge_water": {
+      "unit": "oz",
+      "quantity": 2,
+      "temp": 170
+    },
+    "wet_hops":[
+      {
+        "name":"Cascade",
+        "unit":"oz",
+        "quantity":0.01,
+        "enterAt": 0
+      },
+      {
+        "name":"Cascade",
+        "unit":"oz",
+        "quantity":0.01,
+        "enterAt": 60
+      },
+      {
+        "name":"Cascade",
+        "unit":"oz",
+        "quantity":0.01,
+        "enterAt": 120
+      }
+    ],
+    "dry_hops": [
+      {
+        "name":"Cascade",
+        "unit":"oz",
+        "quantity":0.01
+      }
+    ],
+    "yeast":{
+      "name" : "SafAle American US-05",
+      "unit": "oz",
+      "quantity" : 0.01
+    }
+  }
 }
