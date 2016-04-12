@@ -30,68 +30,95 @@
       "time" : 0,
       "isCountDown" : false,
       "bgColor" : "#3EA0B5"
+    },
+
+    {
+      "name": "pitch",
+      "time": 0,
+      "isCountDown": false,
+      "bgColor": "#000000"
     }
   ],
 
-  "ingredients" : {
-    "malts" : [
-      {
-        "name" : "Two Row",
-        "unit": "lbs",
-        "quantity": 2
-      },
-      {
-        "name": "Crystal 60",
-        "unit": "lbs",
-        "quantity" : 1
-      },
-      {
-        "name": "Chocolate",
-        "unit": "lbs",
-        "quantity": 0.5
-      }
-    ],
-    "strike_water":  {
-      "unit": "oz",
-      "quantity": 1.2,
-      "temp": 150
+  "recipe" : {
+    "setup" : {
+      "equipment" : [
+      ]
     },
-    "sparge_water": {
+
+    "mash": {
+      "time": 3600,
+      "malts" : [
+        {
+          "name" : "Two Row",
+          "unit": "lbs",
+          "quantity": 2
+        },
+        {
+          "name": "Crystal 60",
+          "unit": "lbs",
+          "quantity" : 1
+        },
+        {
+          "name": "Chocolate",
+          "unit": "lbs",
+          "quantity": 0.5
+        }
+      ],
+      "strike_water":  {
+        "unit": "oz",
+        "quantity": 1.2,
+        "temp": 150
+      }
+    },
+
+    "sparge" : {
       "unit": "oz",
       "quantity": 2,
       "temp": 170
     },
-    "wet_hops":[
-      {
-        "name":"Cascade",
-        "unit":"oz",
-        "quantity":0.01,
-        "enterAt": 0
-      },
-      {
-        "name":"Cascade",
-        "unit":"oz",
-        "quantity":0.01,
-        "enterAt": 60
-      },
-      {
-        "name":"Cascade",
-        "unit":"oz",
-        "quantity":0.01,
-        "enterAt": 120
+
+    "boil" : {
+      "time": 4800,
+      "hops":[
+        {
+          "name":"Cascade",
+          "unit":"oz",
+          "quantity":0.01,
+          "enterAt": 0
+        },
+        {
+          "name":"Cascade",
+          "unit":"oz",
+          "quantity":0.01,
+          "enterAt": 60
+        },
+        {
+          "name":"Cascade",
+          "unit":"oz",
+          "quantity":0.01,
+          "enterAt": 120
+        }
+      ]
+    },
+
+    "ice_bath" : {
+      "temp" : 69
+    },
+
+    "pitch": {
+      "hops": [
+        {
+          "name":"Cascade",
+          "unit":"oz",
+          "quantity":0.01
+        }
+      ],
+      "yeast":{
+        "name" : "SafAle American US-05",
+        "unit": "oz",
+        "quantity" : 0.01
       }
-    ],
-    "dry_hops": [
-      {
-        "name":"Cascade",
-        "unit":"oz",
-        "quantity":0.01
-      }
-    ],
-    "yeast":{
-      "name" : "SafAle American US-05",
-      "unit": "oz",
-      "quantity" : 0.01
     }
   }
 }
