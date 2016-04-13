@@ -9,13 +9,18 @@ var Actions = require('beertimer/actions.js');
 var CurrentStep = require('./currentStep/currentStep.jsx');
 var StepList = require('./stepList/stepList.jsx');
 
+
+
+// TODO
+// Make example UI instructions for awesome_brew.json
+
 var BeerTimer = React.createClass({
 	mixins : [Store.mixin()],
 	getInitialState: function() {
 		return {
 			timerInfo : Store.getTimerInfo(),
 			currentStep: Store.getCurrentStep(),
-			steps : Store.getState().steps
+			brew : Store.getState().brew
 		};
 	},
 
@@ -24,7 +29,7 @@ var BeerTimer = React.createClass({
 		this.setState({
 			timerInfo : Store.getTimerInfo(),
 			currentStep: Store.getCurrentStep(),
-			steps : Store.getState().steps
+			brew : Store.getState().brew
 		});
 	},
 
@@ -47,7 +52,7 @@ var BeerTimer = React.createClass({
 	render : function(){
 		return <div className='beertimer' style={{backgroundColor : this.state.currentStep.bgColor}}>
 			<CurrentStep step={this.state.currentStep} timerInfo={this.state.timerInfo}/>
-			<StepList steps={this.state.steps} selectedIndex={Store.getState().currentStepIndex} />
+			<StepList steps={this.state.brew.steps} selectedIndex={Store.getState().currentStepIndex} />
 		</div>
 	},
 });

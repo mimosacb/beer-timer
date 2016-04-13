@@ -1,6 +1,9 @@
 var flux = require('pico-flux');
 var fetch = require('isomorphic-fetch');
 var _ = require('lodash');
+var Brew = require('beertimer/brew.js');
+
+var defaultBrew = new Brew({});
 
 //Put the initial state of your State here
 var State = {
@@ -10,44 +13,8 @@ var State = {
 		time : 0
 	},
 	currentStepIndex : 0,
-	"steps" : [
-	{
-		"name" : "setup",
-		"time" : 0,
-		"isCountDown" : false,
-		"bgColor" : "#81A801"
-	},
-	{
-		"name" : "mash",
-		"time" : 0,
-		"isCountDown" : false,
-		"bgColor" : "#D98027"
-	},
-	{
-		"name" : "sparge",
-		"time" : 0,
-		"isCountDown" : false,
-		"bgColor" : "#B36615"
-	},
-	{
-		"name" : "boil",
-		"time" : 0,
-		"isCountDown" : false,
-		"bgColor" : "#B64240"
-	},
-	{
-		"name" : "ice bath",
-		"time" : 0,
-		"isCountDown" : false,
-		"bgColor" : "#3EA0B5"
-	},
-	{
-		"name": "pitch",
-		"time": 0,
-		"isCountDown": false,
-		"bgColor": "#000000"
-	}
-  ],
+
+	brew: defaultBrew
 };
 
 
@@ -57,19 +24,9 @@ var Store = flux.createStore({
 		fetch('/api/brews/awesome_brew')
 			.then(response => response.json())
 			.then(json => {
-				var recipe = json && json.recipe;
-				if (recipe) {
-					_.each(State.steps, function(step){
-						var matchingStep = recipe[step.name];
-						if (matchingStep && matchingStep.time) {
-							step.time = matchingStep.time;
-							step.isCountDown = true;
-						} else {
-							step.time = 0;
-							step.isCountDown = false;
-						}
-					});
-
+				if (json) {
+					var brew = new Brew(json);
+					State.brew = brew;
 					this.emitChange();
 				} else {
 					console.error('Failed to load brew');
@@ -140,7 +97,7 @@ var Store = flux.createStore({
 	},
 
 	getCurrentStep: function(){
-		return State.steps[State.currentStepIndex];
+		return State.brew.steps[State.currentStepIndex];
 	}
 });
 
