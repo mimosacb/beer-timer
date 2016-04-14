@@ -21,9 +21,9 @@ var CurrentStep = React.createClass({
 
 	renderPauseResume : function(){
 		if(this.props.timerInfo.isRunning){
-			return <i className='fa fa-pause' />
-		}else{
 			return <i className='fa fa-play' />
+		}else{
+			return <i className='fa fa-pause' />
 		}
 	},
 
@@ -31,7 +31,7 @@ var CurrentStep = React.createClass({
 		return <div className='currentStep'>
 			<h1>{this.props.step.name}</h1>
 			<Timer time={this.props.timerInfo.time} />
-			<div className="pauseResume">
+			<div className="pauseResume" style={{opacity : this.props.timerInfo.isRunning}}>
 				{this.renderPauseResume()}
 			</div>
 		</div>

@@ -63,6 +63,9 @@ var Brew = function(brewJson) {
 	});
 
 	// Make Mash Instructions
+	var mashStep = _.findWhere(this.steps, {name: "mash"});
+
+
 	// Make Sparge Instructions
 	// Make Boil Instructions
 	// Make Ice Bath Instructions
