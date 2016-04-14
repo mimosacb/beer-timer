@@ -59,21 +59,7 @@ var Brew = function(brewJson) {
 
 	setupStep.instructions.push({
 		name: "Get equipment",
-		list: [
-			"2 Gal. Brew Pot (or larger)",
-			"2 Gal. Fermenting Bucket",
-			"Large Strainer",
-			"Pair of Tongs",
-			"1 Gal. Jug",
-			"Airlock",
-			"Long Spoon or Paddle",
-			"Hydrometer",
-			"Thermometer",
-			"No-Rinse Sanitizer",
-			"Cleanser",
-			"Mini Auto Siphon",
-			"Ice"
-		]
+		list: recipe.setup.equipment
 	});
 
 	// Make Mash Instructions
