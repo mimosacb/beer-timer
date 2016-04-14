@@ -31,7 +31,7 @@ var CurrentStep = React.createClass({
 		return <div className='currentStep'>
 			<h1>{this.props.step.name}</h1>
 			<Timer time={this.props.timerInfo.time} />
-			<div className="pauseResume" style={{opacity : this.props.timerInfo.isRunning}}>
+			<div className="pauseResume">
 				{this.renderPauseResume()}
 			</div>
 		</div>
