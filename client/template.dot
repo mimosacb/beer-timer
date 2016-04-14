@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<script>global=window</script>
-
+		<script src="https://use.typekit.net/kjv5ypc.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
 		<script type="text/javascript">
 		  WebFontConfig = {
 		    google: { families: [ 'Open+Sans:400,300,600,700,800:latin' ] }
