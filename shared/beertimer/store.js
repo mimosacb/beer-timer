@@ -3,7 +3,7 @@ var fetch = require('isomorphic-fetch');
 var _ = require('lodash');
 var Brew = require('beertimer/brew.js');
 
-var defaultBrew = new Brew({});
+var defaultBrew = new Brew();
 
 //Put the initial state of your State here
 var State = {
@@ -13,7 +13,6 @@ var State = {
 		time : 0
 	},
 	currentStepIndex : 0,
-
 	brew: defaultBrew
 };
 
