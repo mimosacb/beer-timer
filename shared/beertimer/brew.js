@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var makeDefaultStep = function(name, bgColor) {
 	return {
 		"name" : name,
@@ -35,7 +37,7 @@ var Brew = function(brewJson) {
 	});
 
 	// Make Setup Instructions
-	var setupStep = _.findWhere(this.steps, {name: "setup"});
+	var setupStep = _.find(this.steps, {name: "setup"});
 
 	var makeIngredients = function(label, ingredients) {
 		return _.map(ingredients, function(ingr){
@@ -43,28 +45,39 @@ var Brew = function(brewJson) {
 		});
 	};
 
-	var strikeWater = 'Strike water: ' + recipe.mash.strike_water.quantity + recipe.mash.strike_water.unit;
-	var spargeWater = 'Sparge water: ' + recipe.sparge.quantity + recipe.sparge.unit;
-	var malts = makeIngredients('Malt', recipe.mash.malts);
-	var wet_hops = makeIngredients('Hop', recipe.boil.hops);
-	var dry_hops = makeIngredients('Dry Hop', recipe.pitch.hops);
+	var strikeWaterIngr = 'Strike water: ' + recipe.mash.strike_water.quantity + recipe.mash.strike_water.unit;
+	var spargeWaterIngr = 'Sparge water: ' + recipe.sparge.quantity + recipe.sparge.unit;
+	var maltIngrs = makeIngredients('Malt', recipe.mash.malts);
+	var wetHopIngrs = makeIngredients('Hop', recipe.boil.hops);
+	var dryHopIngrs = makeIngredients('Dry Hop', recipe.pitch.hops);
 
-	var ingredients = [strikeWater, spargeWater, malts, wet_hops, dry_hops ];
+	var ingredients = [strikeWaterIngr, spargeWaterIngr, maltIngrs, wetHopIngrs, dryHopIngrs ];
 	ingredients = _.flatten(ingredients);
 
-	setupStep.instructions.push({
-		name: "Get ingredients",
-		list: ingredients
-	});
-
-	setupStep.instructions.push({
-		name: "Get equipment",
-		list: recipe.setup.equipment
-	});
+	setupStep.instructions = [
+		{
+			name: "Get ingredients",
+			list: ingredients
+		},
+		{
+			name: "Get equipment",
+			list: recipe.setup.equipment
+		}
+	];
 
 	// Make Mash Instructions
-	var mashStep = _.findWhere(this.steps, {name: "mash"});
-
+	var mashStep = _.find(this.steps, {name: "mash"});
+	var strike_water = recipe.mash.strike_water;
+	mashStep.instructions = [
+		{
+			name: "Heat strike water",
+			description: `${strike_water.quantity}${strike_water.unit} to ${strike_water.temp}`
+		},
+		{
+			name: "Add malts to strike water",
+			list: maltIngrs
+		}
+	];
 
 	// Make Sparge Instructions
 	// Make Boil Instructions
