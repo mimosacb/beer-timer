@@ -13,7 +13,19 @@ var gulp = vitreumTasks(gulp, {
 
 	additionalRequirePaths : ['./shared'],
 
-	assetExts: ["*.svg", "*.png", "*.jpg", "*.pdf", "*.eot", "*.otf", "*.woff", "*.woff2", "*.ico", "*.ttf"],
+	assetExts: [
+		"*.svg",
+		"*.png",
+		"*.jpg",
+		"*.pdf",
+		"*.eot",
+		"*.otf",
+		"*.woff",
+		"*.woff2",
+		"*.ico",
+		"*.ttf",
+		"*.mp4"
+	],
 
 	serverWatchPaths: ["server"],
 	serverScript: "server.js",

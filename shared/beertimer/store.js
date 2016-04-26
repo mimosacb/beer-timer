@@ -7,6 +7,7 @@ var _ = require('lodash');
 
 //Put the initial state of your State here
 var State = {
+	bgColor : '#444',
 	timer : {
 		direction : 'up', //'down'
 		isRunning : false,
@@ -22,7 +23,6 @@ var State = {
 
 var Store = flux.createStore({
 	INIT : function(defaultBrew){
-		console.log('init', defaultBrew);
 		State.brew = defaultBrew;
 /*
 		fetch('/api/brews/awesome_brew')
@@ -48,7 +48,7 @@ var Store = flux.createStore({
 			}
 		}, 1000);
 		var tempState = localStorage.getItem('test');
-		//if(tempState) State = _.extend({}, State, JSON.parse(tempState));
+		if(tempState) State = _.extend({}, State, JSON.parse(tempState));
 	},
 
 
@@ -82,13 +82,16 @@ var Store = flux.createStore({
 		var currentStep = Store.getCurrentStep();
 
 		State.timer.isRunning = true;
-		if(currentStep.isCountDown){
+		if(currentStep.time && currentStep.time !== 0){
 			State.timer.direction = 'down';
 		}else{
 			State.timer.direction = 'up';
 		}
 
-		State.timer.time = currentStep.time;
+		State.timer.time = currentStep.time || 0;
+	},
+	SET_BG_COLOR : function(bgColor){
+		State.bgColor = bgColor;
 	},
 },{
 	getState : function(){
@@ -99,11 +102,15 @@ var Store = flux.createStore({
 	getTimerInfo : function(){
 		return State.timer;
 	},
-
 	getCurrentStep: function(){
-		console.log('step', State.brew)
 		return State.brew.steps[State.currentStepIndex];
-	}
+	},
+	getNextStep: function(){
+		return State.brew.steps[State.currentStepIndex + 1];
+	},
+	getBackgroundColor : function(){
+		return State.bgColor;
+	},
 });
 
 module.exports = Store;

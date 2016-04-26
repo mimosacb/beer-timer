@@ -22,9 +22,11 @@ var Actions = {
 		dispatch('SET_STEP_INDEX', index);
 	},
 	nextStep : function(){
-		console.log(Store);
-
 		Actions.setStepIndex(Store.getState().currentStepIndex + 1)
+	},
+
+	setBackgroundColor : function(bgColor){
+		dispatch('SET_BG_COLOR', bgColor);
 	},
 };
 

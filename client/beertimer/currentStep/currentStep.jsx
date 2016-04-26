@@ -2,7 +2,10 @@ var React = require('react');
 var _ = require('lodash');
 var cx = require('classnames');
 
-var InstructionList = require('./instructionList/instructionList.jsx')
+//var InstructionList = require('./instructionList/instructionList.jsx')
+
+var Instruction = require('./instruction/instruction.jsx');
+
 
 var Timer = require('beertimer/components/timer/timer.jsx');
 
@@ -16,8 +19,12 @@ var CurrentStep = React.createClass({
 			step: {
 				name : "",
 				time: 0,
-				//isCountDown: false,
-				//instructions: []
+			},
+
+			//Optional
+			nextStep : {
+				name : "",
+				time: 0,
 			}
 		};
 	},
@@ -29,6 +36,18 @@ var CurrentStep = React.createClass({
 			return <i className='fa fa-pause' />
 		}
 	},
+	renderCurrentInstruction : function(){
+		return <Instruction step={this.props.step} />
+	},
+	renderNextInstruction : function(){
+		if(this.props.nextStep.name == "") return;
+
+		//TODO: Add in a renderer for a timer if the step is a count down
+
+		return <div className='nextStep'>
+			{this.props.nextStep.name}
+		</div>
+	},
 
 	render : function(){
 		return <div className='currentStep'>
@@ -37,7 +56,10 @@ var CurrentStep = React.createClass({
 			<div className="pauseResume">
 				{this.renderPauseResume()}
 			</div>
-			<InstructionList instructions={this.props.step.instructions} currentInstructionIdx={0}/>
+
+			{this.renderCurrentInstruction()}
+			{this.renderNextInstruction()}
+
 		</div>
 	},
 });

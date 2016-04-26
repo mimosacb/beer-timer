@@ -20,6 +20,7 @@ var BeerTimer = React.createClass({
 		return {
 			timerInfo : Store.getTimerInfo(),
 			currentStep: Store.getCurrentStep(),
+			nextStep: Store.getNextStep(),
 			brew : Store.getState().brew
 		};
 	},
@@ -29,6 +30,7 @@ var BeerTimer = React.createClass({
 		this.setState({
 			timerInfo : Store.getTimerInfo(),
 			currentStep: Store.getCurrentStep(),
+			nextStep: Store.getNextStep(),
 			brew : Store.getState().brew
 		});
 	},
@@ -50,18 +52,16 @@ var BeerTimer = React.createClass({
 	},
 
 	render : function(){
-		//TODO: Should move this somehow to step renderer
-		var bgColor = "#eee";
-		if(this.props.currentStep){
-			bgColor = this.props.currentStep.bgColor;
-		}
-
-		return <div className='beertimer' style={{backgroundColor : bgColor}}>
+		return <div className='beertimer' style={{backgroundColor : Store.getBackgroundColor()}}>
 			<div className='left-sidebar'>
 				<StepList steps={this.state.brew.steps} selectedIndex={Store.getState().currentStepIndex} />
 			</div>
 			<div className='center-content'>
-				<CurrentStep step={this.state.currentStep} timerInfo={this.state.timerInfo}/>
+				<CurrentStep
+					step={this.state.currentStep}
+					nextStep={this.state.nextStep}
+					timerInfo={this.state.timerInfo}
+				/>
 			</div>
 			<div className="right-sidebar"></div>
 		</div>
