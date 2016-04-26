@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Instruction = require('./../instruction/instruction.jsx');
+var Instruction = require('./instruction/instruction.jsx');
 
 var InstructionList = React.createClass({
 	getDefaultProps: function() {
@@ -26,8 +26,13 @@ var InstructionList = React.createClass({
 
 	render : function(){
 		return <div className='instructionList'>
-			{this.renderInstruction(this.props.currentInstructionIdx, true)}
-			{this.renderInstruction(this.props.currentInstructionIdx + 1, false)}
+			<div className="flex-left"></div>
+			<div className="flex-center">
+				{this.renderInstruction(this.props.currentInstructionIdx, true)}
+			</div>
+			<div className="flex-right">
+				{this.renderInstruction(this.props.currentInstructionIdx + 1, false)}
+			</div>
 		</div>
 	},
 });

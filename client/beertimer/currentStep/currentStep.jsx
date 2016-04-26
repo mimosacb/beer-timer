@@ -2,6 +2,8 @@ var React = require('react');
 var _ = require('lodash');
 var cx = require('classnames');
 
+var InstructionList = require('./instructionList/instructionList.jsx')
+
 var Timer = require('beertimer/components/timer/timer.jsx');
 
 var CurrentStep = React.createClass({
@@ -14,7 +16,8 @@ var CurrentStep = React.createClass({
 			step: {
 				name : "",
 				time: 0,
-				isCountDown: false
+				//isCountDown: false,
+				//instructions: []
 			}
 		};
 	},
@@ -34,6 +37,7 @@ var CurrentStep = React.createClass({
 			<div className="pauseResume">
 				{this.renderPauseResume()}
 			</div>
+			<InstructionList instructions={this.props.step.instructions} currentInstructionIdx={0}/>
 		</div>
 	},
 });

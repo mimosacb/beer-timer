@@ -8,7 +8,7 @@ var Actions = require('beertimer/actions.js');
 //Components
 var CurrentStep = require('./currentStep/currentStep.jsx');
 var StepList = require('./stepList/stepList.jsx');
-var InstructionList = require('./instructionList/instructionList.jsx');
+//var InstructionList = require('./instructionList/instructionList.jsx');
 
 
 // TODO
@@ -34,7 +34,7 @@ var BeerTimer = React.createClass({
 	},
 
 	componentDidMount: function() {
-		Actions.init();
+		Actions.init(window.defaultBrew);
 
 		document.onkeydown = (evt)=>{
 			if(evt.keyCode == 32) this.handleSpacebarPress()
@@ -50,13 +50,18 @@ var BeerTimer = React.createClass({
 	},
 
 	render : function(){
-		return <div className='beertimer' style={{backgroundColor : this.state.currentStep.bgColor}}>
+		//TODO: Should move this somehow to step renderer
+		var bgColor = "#eee";
+		if(this.props.currentStep){
+			bgColor = this.props.currentStep.bgColor;
+		}
+
+		return <div className='beertimer' style={{backgroundColor : bgColor}}>
 			<div className='left-sidebar'>
 				<StepList steps={this.state.brew.steps} selectedIndex={Store.getState().currentStepIndex} />
 			</div>
 			<div className='center-content'>
 				<CurrentStep step={this.state.currentStep} timerInfo={this.state.timerInfo}/>
-				<InstructionList instructions={this.state.currentStep.instructions} currentInstructionIdx={0}/>
 			</div>
 			<div className="right-sidebar"></div>
 		</div>

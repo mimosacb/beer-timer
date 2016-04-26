@@ -1,7 +1,9 @@
+
 {
   "name" : "The Awesome Brew",
-  "recipe" : {
-    "setup" : {
+  "steps" : [
+    {
+      "name" : "setup",
       "equipment" : [
         "2 Gal. Brew Pot (or larger)",
         "2 Gal. Fermenting Bucket",
@@ -18,8 +20,8 @@
         "Ice"
       ]
     },
-
-    "mash": {
+    {
+      "name" : "mash",
       "time": 3600,
       "malts" : [
         {
@@ -44,14 +46,14 @@
         "temp": 150
       }
     },
-
-    "sparge" : {
+    {
+      "name" : "sparge",
       "unit": "oz",
       "quantity": 2,
       "temp": 170
     },
-
-    "boil" : {
+    {
+      "name" : "boil",
       "time": 4800,
       "hops":[
         {
@@ -74,12 +76,12 @@
         }
       ]
     },
-
-    "ice bath" : {
+    {
+      "name" : "ice_bath",
       "temp" : 69
     },
-
-    "pitch": {
+    {
+      "name" : "pitch",
       "hops": [
         {
           "name":"Cascade",
@@ -93,5 +95,5 @@
         "quantity" : 0.01
       }
     }
-  }
+  ]
 }

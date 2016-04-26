@@ -14,9 +14,18 @@ var Instruction = React.createClass({
 
 	renderContent: function() {
 		if (this.props.isActive) {
+			var items = _.map(this.props.instruction.list, (item)=>{
+				return <li className="instruction-item">{item}</li>
+			});
+
+			var itemList = null;
+			if (items.length > 0) {
+				itemList = <ul className="instruction-item-list">{items}</ul>
+			}
+
 			return <div>
-				<div>{this.props.instruction.list}</div>
-				<div>{this.props.instruction.description}</div>
+				{itemList}
+				<p className="instruction-description">{this.props.instruction.description}</p>
 			</div>
 		}
 		return;
@@ -24,7 +33,7 @@ var Instruction = React.createClass({
 
 	render : function(){
 		return <div className='instruction'>
-			<div>{this.props.instruction.name}</div>
+			<h2 className="instruction-name">{this.props.instruction.name}</h2>
 			{this.renderContent()}
 		</div>
 	},

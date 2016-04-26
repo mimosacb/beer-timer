@@ -1,9 +1,9 @@
 var flux = require('pico-flux');
 var fetch = require('isomorphic-fetch');
 var _ = require('lodash');
-var Brew = require('beertimer/brew.js');
+//var Brew = require('beertimer/brew.js');
 
-var defaultBrew = new Brew();
+//var defaultBrew = new Brew();
 
 //Put the initial state of your State here
 var State = {
@@ -13,25 +13,30 @@ var State = {
 		time : 0
 	},
 	currentStepIndex : 0,
-	brew: defaultBrew
+	brew: {
+		steps : []
+
+	},//defaultBrew
 };
 
 
 var Store = flux.createStore({
-	INIT : function(){
-
+	INIT : function(defaultBrew){
+		console.log('init', defaultBrew);
+		State.brew = defaultBrew;
+/*
 		fetch('/api/brews/awesome_brew')
 			.then(response => response.json())
 			.then(json => {
 				if (json) {
-					var brew = new Brew(json);
-					State.brew = brew;
+					//var brew = new Brew(json);
+					State.brew = json;
 					this.emitChange();
 				} else {
 					console.error('Failed to load brew');
 				}
 			});
-
+*/
 		setInterval(()=>{
 			if(State.timer.isRunning){
 				if(State.timer.direction == 'up'){
@@ -43,7 +48,7 @@ var Store = flux.createStore({
 			}
 		}, 1000);
 		var tempState = localStorage.getItem('test');
-		if(tempState) State = _.extend({}, State, JSON.parse(tempState));
+		//if(tempState) State = _.extend({}, State, JSON.parse(tempState));
 	},
 
 
@@ -96,6 +101,7 @@ var Store = flux.createStore({
 	},
 
 	getCurrentStep: function(){
+		console.log('step', State.brew)
 		return State.brew.steps[State.currentStepIndex];
 	}
 });

@@ -21,11 +21,19 @@ app.get('/api/brews/:brewid', function(req, res){
 	});
 });
 
+
+var defaultBrew = JSON.parse(fs.readFileSync('./shared/brews/awesome_brew.json', 'utf8'));
+
 // Fall back on index
 app.get('*', function (req, res) {
+
+	//console.log("BREW", defaultBrew);
+
 	vitreumRender({
 		page: './build/beertimer/bundle.dot',
-		globals:{},
+		globals:{
+			defaultBrew : defaultBrew
+		},
 		prerenderWith : './client/beertimer/beertimer.jsx',
 		initialProps: {
 			url: req.originalUrl

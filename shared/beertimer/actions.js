@@ -3,8 +3,8 @@ var Store = require('beertimer/store.js');
 
 
 var Actions = {
-	init : function(){
-		dispatch('INIT');
+	init : function(defaultBrew){
+		dispatch('INIT', defaultBrew);
 	},
 
 	setTimer : function(time){
