@@ -3,10 +3,22 @@ var _ = require('lodash');
 var cx = require('classnames');
 
 var Actions = require('beertimer/actions.js');
+var Store = require('beertimer/store.js');
 
 var PitchStep = React.createClass({
 
-	//TODO: Spacebar should also pause the video
+	//TODO: Timer state (aka spacebar) should also pause/play the video
+	mixins : [Store.mixin()],
+	getInitialState: function() {
+		return {
+			timer : Store.getTimerInfo()
+		};
+	},
+	onStoreChange: function() {
+		return {
+			timer : Store.getTimerInfo()
+		};
+	},
 
 	componentDidMount: function() {
 		Actions.setBackgroundColor('transparent');
