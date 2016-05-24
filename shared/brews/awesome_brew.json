@@ -54,7 +54,7 @@
     },
     {
       "name" : "boil",
-      "time": 4800,
+      "time": 3600,
       "hops":[
         {
           "name":"Cascade",

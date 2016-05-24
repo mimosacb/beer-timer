@@ -22,7 +22,17 @@ var PitchStep = React.createClass({
 
 	componentDidMount: function() {
 		Actions.setBackgroundColor('transparent');
-		this.refs.taytaySwift.play()
+		this.refs.taytaySwift.play();
+	},
+
+	componentDidUpdate: function(){
+		// Pause or play video based on timer
+		if(this.state.timer.isRunning){
+			console.log("play that sucker")
+			this.refs.taytaySwift.play()
+		}else{
+			this.refs.taytaySwift.pause()
+		}
 	},
 
 	renderVideo : function(){
