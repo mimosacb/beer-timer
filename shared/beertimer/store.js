@@ -1,57 +1,52 @@
 var flux = require('pico-flux');
-var fetch = require('isomorphic-fetch');
 var _ = require('lodash');
 
-
-
 var recipe = {
-	name : "Shacalacka",
+	name : '',
 	steps : {
 		mash : {
+			name : 'mash',
 			timer : 6000,
-​			instructions : [
+			bgColor : '#F45E4B',
+			instructions : [
 				{
-					text : "heat 1 gallon of water to 150f",
+					text : 'heat 1 gallon of water'
 				},
 				{
-					text : "whtever",
-					sub_timer : 4000,
+					text : 'whatever',
+					timer : 5000
 				},
 				{
-					text : 'neato'
+					text : 'dsfgsdf'
 				}
-​
 			]
 		},
 		sparge : {
-​			instructions : [
+			name : 'sparge',
+			bgColor : '#4AC287',
+			instructions : [
 				{
-					text : "heat 1 gallon of water to 150f",
+					text : 'heat 1 gallon of water'
 				}
 			]
-		}
+		},
 	}
-};
+}
+
 
 
 
 var State = {
 	recipe : recipe,
-
 	currentStep : 'mash',
-	currentInstruction : 2,
-	​
+	currentInstruction : 0,
 	activeTimers : {
-		mash2 : 4000
+		mash1 : 4000
 	},
-
-
-	completedInstructions : {
-	​	mash : [true, true],
-		sparge : []
-	}
-
-
+	completed : {
+		mash : [true, false, true],
+		sparge : [true]
+	},
 };
 
 
@@ -161,6 +156,7 @@ var Store = flux.createStore({
 		return State;
 	},
 
+/*
 	//Getters allow your components to easily grab slices of the State's state to process/use
 	getTimerInfo : function(){
 		return State.timer;
@@ -174,6 +170,36 @@ var Store = flux.createStore({
 	getBackgroundColor : function(){
 		return State.bgColor;
 	},
+*/
+////////////////
+
+	getCurrentBackground : function(){
+		return State.recipe.steps[State.currentStep].bgColor;
+	},
+
+	getCurrentStep : function(){
+		return State.recipe.steps[State.currentStep];
+	},
+
+	getCurrentInstruction : function(){
+		return State.recipe.steps[State.currentStep].instructions[State.currentInstruction];
+	},
+
+
+	getInstruction : function(step, index){
+		if(State.recipe.steps[step]) return State.recipe.steps[step].instructions[index] || {};
+		return {};
+	},
+
+	isComplete : function(step, index){
+		return !!State.completed[step][index];
+	},
+
+	isCurrent : function(step, index){
+		return State.currentStep == step && State.currentInstruction == index;
+	},
+
+
 });
 
 module.exports = Store;
