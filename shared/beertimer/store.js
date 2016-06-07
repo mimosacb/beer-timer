@@ -1,6 +1,69 @@
 var flux = require('pico-flux');
 var fetch = require('isomorphic-fetch');
 var _ = require('lodash');
+
+
+
+var recipe = {
+	name : "Shacalacka",
+	steps : {
+		mash : {
+			timer : 6000,
+​			instructions : [
+				{
+					text : "heat 1 gallon of water to 150f",
+				},
+				{
+					text : "whtever",
+					sub_timer : 4000,
+				},
+				{
+					text : 'neato'
+				}
+​
+			]
+		},
+		sparge : {
+​			instructions : [
+				{
+					text : "heat 1 gallon of water to 150f",
+				}
+			]
+		}
+	}
+};
+
+
+
+var State = {
+	recipe : recipe,
+
+	currentStep : 'mash',
+	currentInstruction : 2,
+	​
+	activeTimers : {
+		mash2 : 4000
+	},
+
+
+	completedInstructions : {
+	​	mash : [true, true],
+		sparge : []
+	}
+
+
+};
+
+
+
+
+
+
+
+
+/*
+
+
 //var Brew = require('beertimer/brew.js');
 
 //var defaultBrew = new Brew();
@@ -19,7 +82,7 @@ var State = {
 
 	},//defaultBrew
 };
-
+*/
 
 var Store = flux.createStore({
 	INIT : function(defaultBrew){
