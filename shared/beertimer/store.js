@@ -79,21 +79,49 @@ var activeInstruction = function(stepName, instructionIndex){
 	State.currentInstruction = instructionIndex;
 }
 
+var updateTimers = function(){
+	_.each(State.timers.up, (time, id)=>{
+		State.timers.up[id] += 1;
+	});
 
+	_.each(State.timers.down, (time, id)=>{
+		if(State.timers.down[id] !== false){
+			State.timers.down[id] -= 1;
+		}
+		if(State.timers.down[id] === 0){
+			State.timers.down[id] = false;
+		}
+	});
+};
 
 var Store = flux.createStore({
 	INIT : function(brewRecipe){
-		State.recipe = brewRecipe;
+		State.recipe = recipe;
 
 		//build the completed object
+		State.completed = _.reduce(State.recipe.steps, (r, step)=>{
+			r[step.name] = _.times(step.instructions.length, ()=>{return false});
+			return r
+		}, {});
+
 		//clear the timers
+		State.timers.up = {};
+		State.timers.down = {};
+
 		//set the current step and instruction to basic
-		//kick off the timer loop
+		State.currentStep = _.keys(State.recipe.steps)[0];
+		State.currentInstruction = 0;
+
 		//make timerRunning false
+		State.timerRunning = false;
 
-
-
-
+		//kick off the timer loop
+		setInterval(()=>{
+			if(State.timerRunning){
+				updateTimers();
+				this.emitChange();
+			}
+		}, 1000);
 	},
 
 	ACTIVATE_STEP : function(stepName){
@@ -159,6 +187,10 @@ var Store = flux.createStore({
 		var id = `${stepName}${index}`;
 		if(!_.isUndefined(State.timers.up[id])) return State.timers.up[id];
 		if(!_.isUndefined(State.timers.down[id])) return State.timers.down[id];
+	},
+
+	getCurrentBackground  : function(){
+
 	},
 
 

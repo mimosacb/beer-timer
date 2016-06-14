@@ -33,7 +33,7 @@ var BeerTimer = React.createClass({
 	},
 
 	componentDidMount: function() {
-		//Actions.init(window.defaultBrew);
+		Actions.init();
 
 		document.onkeydown = (evt)=>{
 			if(evt.keyCode == 32) this.handleSpacebarPress()
