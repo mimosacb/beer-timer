@@ -13,7 +13,6 @@ var StepContainer = React.createClass({
 
 	renderSteps : function(){
 		return _.map(this.props.steps, (step, name) =>{
-			console.log(step);
 			return <Step step={step} key={name}/>
 		});
 	},
@@ -21,7 +20,6 @@ var StepContainer = React.createClass({
 
 	render : function(){
 		return <div className='stepContainer'>
-			StepContainer Ready!
 			{this.renderSteps()}
 		</div>
 	}
