@@ -26,9 +26,13 @@ var ActiveContainer = React.createClass({
 
 
 	render : function(){
+		console.log(this.state.step)
+		console.log(Store.getTimer(this.state.step.name))
+
+
 		return <div className='activeContainer'>
 			<h1>{this.state.step.name}</h1>
-			<Timer time={50000} />
+			<Timer time={Store.getTimer(this.state.step.name)} />
 			<Instruction
 				index={this.state.index}
 				stepName={this.state.step.name}

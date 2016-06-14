@@ -41,7 +41,7 @@ var BeerTimer = React.createClass({
 	},
 
 	handleSpacebarPress : function(){
-		if(Store.getTimerInfo().isRunning){
+		if(Store.getState().isTimerRunning){
 			Actions.pauseTimer();
 		}else{
 			Actions.resumeTimer();

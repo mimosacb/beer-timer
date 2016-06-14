@@ -16,6 +16,10 @@ var recipe = {
 					text : 'whatever',
 					timer : 5000
 				},
+
+				{
+					text : 'no timer',
+				},
 				{
 					text : 'dsfgsdf',
 					timer : 0
@@ -41,7 +45,7 @@ var State = {
 	recipe : recipe,
 	currentStep : 'mash',
 	currentInstruction : 0,
-	timerRunning : false,
+	isTimerRunning : false,
 	timers : {
 		up: {
 			mash0 : 4000
@@ -56,23 +60,31 @@ var State = {
 
 
 var activateStep = function(stepName){
+	console.log('activting step');
 	State.currentStep = stepName;
 	State.currentInstruction = 0;
 
-	_.each(State.recipe.steps[stepName].instructions, (instruction, index)=>{
+
+	var makeTimer = function(stepName, index, timer){
 		var id = `${stepName}${index}`;
-		if(_.isUndefined(instruction.timer)) return;
+		if(_.isUndefined(timer)) return;
 		if(!_.isUndefined(Store.getTimer(stepName, index))) return;
 
-		if(instruction.timer === 0){
+		if(timer === 0){
 			State.timers.up[id] = 0;
 		}else{
-			State.timers.down[id] = instruction.timer;
+			State.timers.down[id] = timer;
 		}
+	}
+
+	makeTimer(stepName, '', State.recipe.steps[stepName].timer);
+	_.each(State.recipe.steps[stepName].instructions, (instruction, index)=>{
+		makeTimer(stepName, index, instruction.timer);
 	});
 };
 
-var activeInstruction = function(stepName, instructionIndex){
+var activateInstruction = function(stepName, instructionIndex){
+	console.log('activting instruction');
 	if(State.currentStep !== stepName){
 		activateStep(stepName);
 	}
@@ -80,6 +92,8 @@ var activeInstruction = function(stepName, instructionIndex){
 }
 
 var updateTimers = function(){
+	console.log(State.timers);
+
 	_.each(State.timers.up, (time, id)=>{
 		State.timers.up[id] += 1;
 	});
@@ -109,15 +123,16 @@ var Store = flux.createStore({
 		State.timers.down = {};
 
 		//set the current step and instruction to basic
-		State.currentStep = _.keys(State.recipe.steps)[0];
-		State.currentInstruction = 0;
+		State.currentStep = null;
+		State.currentInstruction = null;
+		activateInstruction(_.keys(State.recipe.steps)[0], 0);
 
-		//make timerRunning false
-		State.timerRunning = false;
+		//make isTimerRunning false
+		State.isTimerRunning = true;
 
 		//kick off the timer loop
 		setInterval(()=>{
-			if(State.timerRunning){
+			if(State.isTimerRunning){
 				updateTimers();
 				this.emitChange();
 			}
@@ -128,7 +143,7 @@ var Store = flux.createStore({
 		activateStep(stepName);
 	},
 	ACTIVATE_INSTRUCTION : function(stepName, instructionIndex){
-		activeInstruction(stepName, instructionIndex);
+		activateInstruction(stepName, instructionIndex);
 	},
 
 	COMPLETE_INSTRUCTION : function(stepName, instructionIndex){
@@ -142,18 +157,20 @@ var Store = flux.createStore({
 
 		var nextInstruction = _.find(State.completed[nextStep]);
 
-		activeInstruction(nextStep, nextInstruction);
+		activateInstruction(nextStep, nextInstruction);
 	},
 	UNCOMPLETE_INSTRUCTION : function(stepName, instructionIndex){
 		State.completed[stepName][instructionIndex] = false;
-		activeInstruction(stepName, instructionIndex);
+		activateInstruction(stepName, instructionIndex);
 	},
 
 	PAUSE_TIMER : function(){
-		State.timerRunning = false;
+		console.log('pause');
+		State.isTimerRunning = false;
 	},
 	RESUME_TIMER : function(){
-		State.timerRunning = true;
+		console.log('resume');
+		State.isTimerRunning = true;
 	},
 
 
@@ -183,14 +200,15 @@ var Store = flux.createStore({
 		return State.currentStep == step && State.currentInstruction == index;
 	},
 
-	getTimer : function(step, index){
+	getTimer : function(stepName, index){
+		index = index || '';
 		var id = `${stepName}${index}`;
 		if(!_.isUndefined(State.timers.up[id])) return State.timers.up[id];
 		if(!_.isUndefined(State.timers.down[id])) return State.timers.down[id];
 	},
 
-	getCurrentBackground  : function(){
-
+	getCurrentBackground : function(){
+		return State.recipe.steps[State.currentStep].bgColor;
 	},
 
 

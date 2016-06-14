@@ -21,13 +21,6 @@ var Actions = {
 		dispatch('UNCOMPLETE_INSTRUCTION', stepName, instructionIndex);
 	},
 
-
-/*
-
-
-	setTimer : function(time){
-		dispatch('SET_TIMER', time);
-	},
 	pauseTimer : function(){
 		dispatch('PAUSE_TIMER');
 	},
@@ -35,18 +28,6 @@ var Actions = {
 		dispatch('RESUME_TIMER');
 	},
 
-	//Step Action
-	setStepIndex : function(index){
-		dispatch('SET_STEP_INDEX', index);
-	},
-	nextStep : function(){
-		Actions.setStepIndex(Store.getState().currentStepIndex + 1)
-	},
-
-	setBackgroundColor : function(bgColor){
-		dispatch('SET_BG_COLOR', bgColor);
-	},
-*/
 };
 
 module.exports = Actions;
