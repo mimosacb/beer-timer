@@ -3,9 +3,27 @@ var Store = require('beertimer/store.js');
 
 
 var Actions = {
-	init : function(defaultBrew){
-		dispatch('INIT', defaultBrew);
+	init : function(brewRecipe){
+		dispatch('INIT', brewRecipe);
 	},
+	activateStep : function(stepName){
+		dispatch('ACTIVATE_STEP', stepName);
+	},
+	activateInstruction : function(stepName, instructionIndex){
+		dispatch('ACTIVATE_INSTRUCTION', stepName, instructionIndex);
+	},
+
+	completeInstruction : function(stepName, instructionIndex){
+		dispatch('COMPLETE_INSTRUCTION', stepName, instructionIndex);
+	},
+
+	uncompleteInstruction : function(stepName, instructionIndex){
+		dispatch('UNCOMPLETE_INSTRUCTION', stepName, instructionIndex);
+	},
+
+
+/*
+
 
 	setTimer : function(time){
 		dispatch('SET_TIMER', time);
@@ -28,6 +46,7 @@ var Actions = {
 	setBackgroundColor : function(bgColor){
 		dispatch('SET_BG_COLOR', bgColor);
 	},
+*/
 };
 
 module.exports = Actions;
