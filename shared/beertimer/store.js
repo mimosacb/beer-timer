@@ -60,10 +60,8 @@ var State = {
 
 
 var activateStep = function(stepName){
-	console.log('activting step');
 	State.currentStep = stepName;
 	State.currentInstruction = 0;
-
 
 	var makeTimer = function(stepName, index, timer){
 		var id = `${stepName}${index}`;
