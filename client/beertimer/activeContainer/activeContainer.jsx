@@ -14,18 +14,18 @@ var ActiveContainer = React.createClass({
 		return {
 			step: Store.getCurrentStep(),
 			index: Store.getState().currentInstruction,
+
+			loadedTayTay : false,
+
+			displayTayTay : false
 		};
 	},
 
 	onStoreChange : function(){
 		console.log('updating', Store.getState().currentInstruction);
 
-		var instruction = Store.getCurrentInstruction();
-
-		if(instruction.taytay == true){
-
-
-		}
+		//Add step and index change check
+		this.checkTayTay();
 
 
 		this.setState({
@@ -35,10 +35,30 @@ var ActiveContainer = React.createClass({
 	},
 
 
+	checkTayTay : function(){
+		var instruction = Store.getCurrentInstruction();
 
+		if(!this.state.displayTayTay && instruction.taytay){
+			this.setState({
+				displayTayTay : true
+			});
+		}else{
+			this.setState({
+				displayTayTay : false
+			});
+		}
+	},
+
+	renderTayTay : function(){
+		if(!this.state.displayTayTay) return;
+		return <video ref="taytaySwift" controls={false}>
+			<source src="/assets/beertimer/currentStep/instruction/pitchStep/shake_it_off.mp4" type="video/mp4" />
+		</video>
+	},
 
 	render : function(){
 		return <div className='activeContainer'>
+			{this.renderTayTay()}
 			<h1>{this.state.step.name}</h1>
 			<Timer time={Store.getTimer(this.state.step.name)} />
 			<Instruction
