@@ -6,7 +6,7 @@ var recipe = {
 	steps : {
 		mash : {
 			name : 'mash',
-			timer : 6000,
+			timer : 6,
 			bgColor : '#F45E4B',
 			instructions : [
 				{
@@ -14,7 +14,7 @@ var recipe = {
 				},
 				{
 					text : 'whatever',
-					timer : 5000
+					timer : 5
 				},
 
 				{
@@ -48,14 +48,12 @@ var State = {
 	currentInstruction : 0,
 	isTimerRunning : false,
 	timers : {
-		up: {
-			mash0 : 4000
-		},
+		up: {},
 		down : {}
 	},
 	completed : {
-		mash : [true, false, true],
-		sparge : [true]
+		mash : [],
+		sparge : []
 	},
 };
 
@@ -141,7 +139,7 @@ var Store = flux.createStore({
 		activateInstruction(_.keys(State.recipe.steps)[0], 0);
 
 		//make isTimerRunning false
-		State.isTimerRunning = true;
+		State.isTimerRunning = false;
 
 		//kick off the timer loop
 		setInterval(()=>{
@@ -204,8 +202,8 @@ var Store = flux.createStore({
 		return State.currentStep == step && State.currentInstruction == index;
 	},
 
-	getTimer : function(stepName, index){
-		index = index || '';
+	getTimer : function(stepName, index = ''){
+		//index = index || '';
 		var id = `${stepName}${index}`;
 		if(!_.isUndefined(State.timers.up[id])) return State.timers.up[id];
 		if(!_.isUndefined(State.timers.down[id])) return State.timers.down[id];

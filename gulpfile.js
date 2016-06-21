@@ -24,7 +24,8 @@ var gulp = vitreumTasks(gulp, {
 		"*.woff2",
 		"*.ico",
 		"*.ttf",
-		"*.mp4"
+		"*.mp4",
+		"*.mp3",
 	],
 
 	serverWatchPaths: ["server"],

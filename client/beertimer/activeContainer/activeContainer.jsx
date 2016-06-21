@@ -26,12 +26,40 @@ var ActiveContainer = React.createClass({
 			step: Store.getCurrentStep(),
 			index: Store.getState().currentInstruction,
 		});
+
+		if(Store.getTimer(this.state.step.name) === false){
+			this.playBeepBeep();
+		}
+	},
+
+	componentDidMount: function() {
+		this.beepbeep = new Audio('/assets/beertimer/activeContainer/beepbeep.mp3');
+	},
+
+	playBeepBeep : function(){
+		this.beepbeep.play();
+	},
+
+	renderStepTimer : function(){
+		var timer = Store.getTimer(this.state.step.name);
+
+		if(timer === false){
+			return <div>
+				<i className='fa fa-exclamation-triangle' />
+				<Timer time={timer} />
+			</div>
+
+		}
+
+		if(timer){
+			return <Timer time={timer} />
+		}
 	},
 
 	render : function(){
 		return <div className='activeContainer'>
 			<h1>{this.state.step.name}</h1>
-			<Timer time={Store.getTimer(this.state.step.name)} />
+			{this.renderStepTimer()}
 			<Instruction
 				index={this.state.index}
 				stepName={this.state.step.name}
