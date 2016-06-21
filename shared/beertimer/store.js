@@ -18,8 +18,8 @@ var recipe = {
 				},
 
 				{
-					text : 'no timer',
-					taytay : true
+					text : 'TAY TAY',
+					play_taytay : true
 				},
 				{
 					text : 'dsfgsdf',

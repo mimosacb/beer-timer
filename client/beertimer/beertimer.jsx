@@ -13,6 +13,7 @@ var Actions = require('beertimer/actions.js');
 
 var ActiveContainer = require('./activeContainer/activeContainer.jsx');
 var StepContainer = require('./stepContainer/stepContainer.jsx');
+var TayTay = require('./taytay/taytay.jsx');
 
 
 // TODO
@@ -54,6 +55,7 @@ var BeerTimer = React.createClass({
 			<StepContainer
 				steps={this.state.recipe.steps}
 			/>
+			<TayTay />
 		</div>
 	},
 });
