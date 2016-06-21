@@ -31,10 +31,7 @@ var TayTay = React.createClass({
 			});
 		}
 
-
-
 		if(this.state.isVisible){
-
 			if(this.state.isPlaying && !Store.getState().isTimerRunning){
 				this.pause();
 			}
@@ -64,11 +61,9 @@ var TayTay = React.createClass({
 	},
 
 	render : function(){
-		return <div className={cx('taytay', {show: this.state.isVisible})} >
-			<video ref="taytaySwift" controls={false}>
+		return <video className={cx('taytay', {show: this.state.isVisible})}  ref="taytaySwift" controls={false}>
 				<source src="/assets//beertimer/taytay/shake_it_off.mp4" type="video/mp4"  />
 			</video>
-		</div>
 	}
 });
 

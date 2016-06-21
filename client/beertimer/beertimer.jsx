@@ -51,11 +51,12 @@ var BeerTimer = React.createClass({
 
 	render : function(){
 		return <div className='beertimer' style={{backgroundColor : Store.getCurrentBackground()}}>
+			<TayTay />
 			<ActiveContainer />
 			<StepContainer
 				steps={this.state.recipe.steps}
 			/>
-			<TayTay />
+
 		</div>
 	},
 });
