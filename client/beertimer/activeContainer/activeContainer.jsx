@@ -13,23 +13,31 @@ var ActiveContainer = React.createClass({
 	getInitialState: function() {
 		return {
 			step: Store.getCurrentStep(),
-			index: Store.getState().currentIndex,
+			index: Store.getState().currentInstruction,
 		};
 	},
 
 	onStoreChange : function(){
+		console.log('updating', Store.getState().currentInstruction);
+
+		var instruction = Store.getCurrentInstruction();
+
+		if(instruction.taytay == true){
+
+
+		}
+
+
 		this.setState({
 			step: Store.getCurrentStep(),
-			index: Store.getState().currentIndex,
+			index: Store.getState().currentInstruction,
 		});
 	},
 
 
+
+
 	render : function(){
-		console.log(this.state.step)
-		console.log(Store.getTimer(this.state.step.name))
-
-
 		return <div className='activeContainer'>
 			<h1>{this.state.step.name}</h1>
 			<Timer time={Store.getTimer(this.state.step.name)} />

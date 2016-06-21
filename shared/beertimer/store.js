@@ -19,6 +19,7 @@ var recipe = {
 
 				{
 					text : 'no timer',
+					taytay : true
 				},
 				{
 					text : 'dsfgsdf',
@@ -87,11 +88,25 @@ var activateInstruction = function(stepName, instructionIndex){
 		activateStep(stepName);
 	}
 	State.currentInstruction = instructionIndex;
+};
+
+
+var activateNextInstruction = function(){
+	var nextStep = _.reduce(State.completed, (r, completedArray, stepName) => {
+		var hasUncompletedSteps = !_.every(completedArray);
+		if(!r && hasUncompletedSteps) r = stepName;
+		return r;
+	}, null);
+
+	var nextInstruction = _.findIndex(State.completed[nextStep], (isCompleted)=>{
+		return !isCompleted;
+	});
+
+	activateInstruction(nextStep, nextInstruction);
+
 }
 
 var updateTimers = function(){
-	console.log(State.timers);
-
 	_.each(State.timers.up, (time, id)=>{
 		State.timers.up[id] += 1;
 	});
@@ -146,20 +161,11 @@ var Store = flux.createStore({
 
 	COMPLETE_INSTRUCTION : function(stepName, instructionIndex){
 		State.completed[stepName][instructionIndex] = true;
-
-		var nextStep = _.reduce(State.completed, (r, completedArray, stepName) => {
-			var hasUncompletedSteps = !_.every(completedArray);
-			if(!r && hasUncompletedSteps) r = stepName;
-			return r;
-		}, null);
-
-		var nextInstruction = _.find(State.completed[nextStep]);
-
-		activateInstruction(nextStep, nextInstruction);
+		activateNextInstruction();
 	},
 	UNCOMPLETE_INSTRUCTION : function(stepName, instructionIndex){
 		State.completed[stepName][instructionIndex] = false;
-		activateInstruction(stepName, instructionIndex);
+		activateNextInstruction();
 	},
 
 	PAUSE_TIMER : function(){

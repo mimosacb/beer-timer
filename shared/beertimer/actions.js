@@ -14,6 +14,7 @@ var Actions = {
 	},
 
 	completeInstruction : function(stepName, instructionIndex){
+		console.log('test');
 		dispatch('COMPLETE_INSTRUCTION', stepName, instructionIndex);
 	},
 
