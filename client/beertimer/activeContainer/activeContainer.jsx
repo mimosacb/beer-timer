@@ -24,7 +24,7 @@ var ActiveContainer = React.createClass({
 	onStoreChange : function(){
 		this.setState({
 			step: Store.getCurrentStep(),
-			index: Store.getState().currentInstruction,
+			index: Store.getState().currnetInstruction,
 		});
 
 		if(Store.getTimer(this.state.step.name) === false){
