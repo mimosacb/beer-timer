@@ -28,6 +28,11 @@ var BrewEditor = require('./brewEditor/brewEditor.jsx');
 
 var BeerTimer = React.createClass({
 	mixins : [Store.mixin()],
+	getDefaultProps: function() {
+		return {
+			recipes : []
+		};
+	},
 	getInitialState: function() {
 		return {
 			recipe : Store.getState().recipe,
@@ -43,8 +48,10 @@ var BeerTimer = React.createClass({
 	},
 
 	componentDidMount: function() {
-		var storedRecipe = localStorage.getItem(BREW_KEY);
+		console.log(this.props);
 
+
+		var storedRecipe = localStorage.getItem(BREW_KEY);
 		try{
 			storedRecipe = JSON.parse(storedRecipe);
 		}catch(e){
