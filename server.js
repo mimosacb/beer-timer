@@ -7,36 +7,30 @@ var app = express();
 var fs = require('fs');
 app.use(express.static(__dirname + '/build'));
 
-// API
-app.get('/api/brews/:brewid', function(req, res){
-	var brewid = req.params.brewid || 'awesome_brew';
-	var rootFolder = 'shared';
-	var path = '/brews/' + brewid + '.json';
-	fs.stat(rootFolder + path, function (err, stats) {
-		if (!err && stats.isFile()) {
-			res.sendFile(path, {root: rootFolder});
-		} else {
-			res.sendStatus(404);
-		}
-	});
-});
+
+var loadRecipes = function(){
+	return _.map(fs.readdirSync('./recipes'), (path)=>{
+		return require('./recipes/' + path)
+	})
+}
+
+var recipes = loadRecipes();
 
 
-var defaultBrew = JSON.parse(fs.readFileSync('./shared/brews/awesome_brew.json', 'utf8'));
+console.log(loadRecipes());
+
 
 // Fall back on index
 app.get('*', function (req, res) {
 
-	//console.log("BREW", defaultBrew);
-
 	vitreumRender({
 		page: './build/beertimer/bundle.dot',
 		globals:{
-			defaultBrew : defaultBrew
 		},
 		prerenderWith : './client/beertimer/beertimer.jsx',
 		initialProps: {
-			url: req.originalUrl
+			url: req.originalUrl,
+			recipes : recipes
 		},
 		clearRequireCache : !process.env.PRODUCTION,
 	}, function (err, page) {
