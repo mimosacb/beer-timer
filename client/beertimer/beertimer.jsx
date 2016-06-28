@@ -36,7 +36,6 @@ var BeerTimer = React.createClass({
 	getInitialState: function() {
 		return {
 			recipe : Store.getState().recipe,
-
 			showEditor : true
 		};
 	},
@@ -47,19 +46,18 @@ var BeerTimer = React.createClass({
 		});
 	},
 
+	componentWillMount: function() {
+		Actions.init(this.props.recipes[0]);
+	},
+
 	componentDidMount: function() {
-		console.log(this.props);
-
-
 		var storedRecipe = localStorage.getItem(BREW_KEY);
 		try{
 			storedRecipe = JSON.parse(storedRecipe);
 		}catch(e){
-			//todo: load default
-			storedRecipe = {};
+			//get a default recipe
+			storedRecipe = this.props.recipes[0];
 		}
-
-
 		Actions.init(storedRecipe);
 
 		document.onkeydown = (evt)=>{
@@ -114,6 +112,8 @@ var BeerTimer = React.createClass({
 	},
 
 	render : function(){
+
+		console.log(this.props.recipes);
 		return <div className='beertimer' style={{backgroundColor : Store.getCurrentBackground()}}>
 			<TayTay />
 

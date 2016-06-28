@@ -20,16 +20,12 @@ var recipes = loadRecipes();
 console.log(loadRecipes());
 
 
-var defaultBrew = JSON.parse(fs.readFileSync('./shared/brews/awesome_brew.json', 'utf8'));
-
 // Fall back on index
 app.get('*', function (req, res) {
 
 	vitreumRender({
 		page: './build/beertimer/bundle.dot',
 		globals:{
-			defaultBrew : defaultBrew,
-			recipes : recipes
 		},
 		prerenderWith : './client/beertimer/beertimer.jsx',
 		initialProps: {

@@ -43,7 +43,7 @@ var recipe = {
 
 
 var State = {
-	recipe : recipe,
+	recipe : {},
 	currentStep : 'mash',
 	currentInstruction : 0,
 	isTimerRunning : false,
@@ -128,7 +128,7 @@ var updateTimers = function(){
 
 var Store = flux.createStore({
 	INIT : function(brewRecipe){
-		State.recipe = brewRecipe;
+		if(brewRecipe) State.recipe = brewRecipe;
 
 		//build the completed object
 		State.completed = _.reduce(State.recipe.steps, (r, step)=>{
