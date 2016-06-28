@@ -29,6 +29,10 @@ var Actions = {
 		dispatch('RESUME_TIMER');
 	},
 
+	changeRecipe : function(recipe){
+		dispatch('CHANGE_RECIPE', recipe);
+	},
+
 };
 
 module.exports = Actions;

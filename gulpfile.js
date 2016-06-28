@@ -9,7 +9,7 @@ var gulp = vitreumTasks(gulp, {
 	buildPath: "./build/",
 	pageTemplate: "./client/template.dot",
 
-	projectModules: ["./shared/beertimer"],
+	projectModules: ["./shared/beertimer","./shared/codemirror"],
 
 	additionalRequirePaths : ['./shared'],
 
@@ -38,6 +38,11 @@ var gulp = vitreumTasks(gulp, {
 		"lodash",
 		"classnames",
 		"pico-flux",
+
+		//From ./shared
+		"codemirror",
+		'codemirror/mode/javascript/javascript.js',
+
 	],
 	clientLibs: [
 

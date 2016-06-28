@@ -1,52 +1,60 @@
+
 @import 'scott_styles/reset.less';
 @import 'scott_styles/animations.less';
-
 //@import 'scott_styles/colors.less';
 //@import 'scott_styles/tooltip.less';
-
 html, body, #reactContainer, .beertimer{
-	height : 100%;
-	box-sizing: border-box;
+	box-sizing : border-box;
+	height     : 100%;
 }
-
 /*
 @bgRed : #d98027;
 @bgGreen : #4ab449;
 */
-
 .beertimer{
 	.animate(background-color, 1s);
-	background-color: blue;
-	z-index: -1;
+	z-index          : -1;
+	background-color : blue;
+	button.refreshState{
+		position : fixed;
+		top      : 0px;
+		right    : 0px;
+		z-index  : 10000;
+		padding  : 8px;
+		cursor   : pointer;
+		border   : none;
+	}
+	button.showEditor{
+		position : fixed;
+		top      : 0px;
+		left    : 0px;
+		z-index  : 10000;
+		padding  : 8px;
+		cursor   : pointer;
+		border   : none;
+	}
 }
-
 html {
-	color: white;
-	font-family: "acumin-pro-extra-condensed", sans-serif;
-	text-transform: uppercase;
+	font-family    : "acumin-pro-extra-condensed", sans-serif;
+	color          : white;
 }
 h1, h2, h3, h4, p, div {
-	line-height: 1.2em;
+	line-height : 1.2em;
 }
-
 h1 {
-	font-size: 3.5em;
-	font-weight: 300;
-	letter-spacing: 0.05em;
+	font-size      : 3.5em;
+	font-weight    : 300;
+	letter-spacing : 0.05em;
 }
-
 h2 {
-	font-size: 2.5em;
-	font-weight: 300;
-	letter-spacing: 0.05em;
+	font-size      : 2.5em;
+	font-weight    : 300;
+	letter-spacing : 0.05em;
 }
-
 h3 {
-	font-size: 2.0em;
-	font-weight: 300;
-	letter-spacing: 0.05em;
+	font-size      : 2.0em;
+	font-weight    : 300;
+	letter-spacing : 0.05em;
 }
-
 ul {
-
 }
