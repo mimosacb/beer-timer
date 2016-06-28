@@ -24,7 +24,7 @@ var ActiveContainer = React.createClass({
 	onStoreChange : function(){
 		this.setState({
 			step: Store.getCurrentStep(),
-			index: Store.getState().currnetInstruction,
+			index: Store.getState().currentInstruction,
 		});
 
 		if(Store.getTimer(this.state.step.name) === false){
@@ -48,7 +48,6 @@ var ActiveContainer = React.createClass({
 				<i className='fa fa-exclamation-triangle' />
 				<Timer time={timer} />
 			</div>
-
 		}
 
 		if(timer){
@@ -56,10 +55,25 @@ var ActiveContainer = React.createClass({
 		}
 	},
 
+
+	renderPausePlay : function(){
+		var running = Store.getTimerRunning()
+
+		return <div className='pauseResume'>
+			<i className={cx('fa', {
+				'fa-play' : running,
+				'fa-pause' : !running
+			})} />
+		</div>
+	},
+
 	render : function(){
 		return <div className='activeContainer'>
 			<h1>{this.state.step.name}</h1>
 			{this.renderStepTimer()}
+			<div className="pausePlay">
+				{this.renderPausePlay()}
+			</div>
 			<Instruction
 				index={this.state.index}
 				stepName={this.state.step.name}

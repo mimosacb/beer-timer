@@ -55,6 +55,7 @@ var State = {
 		mash : [],
 		sparge : []
 	},
+	isBrewComplete: false,
 };
 
 
@@ -90,11 +91,17 @@ var activateInstruction = function(stepName, instructionIndex){
 
 
 var activateNextInstruction = function(){
+
 	var nextStep = _.reduce(State.completed, (r, completedArray, stepName) => {
 		var hasUncompletedSteps = !_.every(completedArray);
 		if(!r && hasUncompletedSteps) r = stepName;
 		return r;
 	}, null);
+
+	if(nextStep == null){
+		State.isBrewComplete = true;
+		return;
+	};
 
 	var nextInstruction = _.findIndex(State.completed[nextStep], (isCompleted)=>{
 		return !isCompleted;
@@ -207,6 +214,10 @@ var Store = flux.createStore({
 		var id = `${stepName}${index}`;
 		if(!_.isUndefined(State.timers.up[id])) return State.timers.up[id];
 		if(!_.isUndefined(State.timers.down[id])) return State.timers.down[id];
+	},
+
+	getTimerRunning : function(){
+		return State.isTimerRunning;
 	},
 
 	getCurrentBackground : function(){

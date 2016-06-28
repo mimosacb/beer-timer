@@ -32,10 +32,10 @@ var TayTay = React.createClass({
 		}
 
 		if(this.state.isVisible){
-			if(this.state.isPlaying && !Store.getState().isTimerRunning){
+			if(this.state.isPlaying && !Store.getTimerRunning()){
 				this.pause();
 			}
-			if(!this.state.isPlaying && Store.getState().isTimerRunning){
+			if(!this.state.isPlaying && Store.getTimerRunning()){
 				this.play();
 			}
 		}

@@ -14,6 +14,7 @@ var Actions = require('beertimer/actions.js');
 var ActiveContainer = require('./activeContainer/activeContainer.jsx');
 var StepContainer = require('./stepContainer/stepContainer.jsx');
 var TayTay = require('./taytay/taytay.jsx');
+var EndStep = require('./endStep/endStep.jsx');
 
 
 // TODO
@@ -42,7 +43,7 @@ var BeerTimer = React.createClass({
 	},
 
 	handleSpacebarPress : function(){
-		if(Store.getState().isTimerRunning){
+		if(Store.getTimerRunning()){
 			Actions.pauseTimer();
 		}else{
 			Actions.resumeTimer();
@@ -56,6 +57,7 @@ var BeerTimer = React.createClass({
 			<StepContainer
 				steps={this.state.recipe.steps}
 			/>
+			<EndStep />
 
 		</div>
 	},

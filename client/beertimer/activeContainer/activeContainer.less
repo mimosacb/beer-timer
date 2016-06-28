@@ -16,3 +16,43 @@
 	}
 
 }
+.pausePlay {
+	//display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	.fa-play, .fa-pause {
+		font-size: 200px;
+		vertical-align: center;
+		margins: auto;
+		opacity: 0;
+	}
+	.fa-pause {
+		animation: pause-fade .8s ease-in;
+	}
+	.fa-play {
+		animation: play-fade .8s ease-in;
+	}
+}
+
+
+
+
+@keyframes play-fade {
+	from {
+		opacity: 0.7;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes pause-fade {
+	from {
+		opacity: 0.7;
+	}
+	to {
+		opacity: 0;
+	}
+}
